@@ -619,7 +619,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === lightbox) closeLightbox();
   });
 
-  document.querySelectorAll('#portfolioTrack video').forEach(v => {
+  // Seek to 3s for any video whose poster image hasn't been pre-generated yet
+  document.querySelectorAll('#portfolioTrack video[preload="metadata"]').forEach(v => {
     const seek = () => { v.currentTime = Math.min(3, v.duration || 3); };
     if (v.readyState >= 1) seek();
     else v.addEventListener('loadedmetadata', seek, { once: true });
