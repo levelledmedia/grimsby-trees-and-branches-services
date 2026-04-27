@@ -592,29 +592,35 @@ document.addEventListener('DOMContentLoaded', function() {
   // Portfolio Lightbox
   // ========================================
   const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxVideo = document.getElementById('lightboxVideo');
   const lightboxClose = document.getElementById('lightboxClose');
-  const portfolioCarouselSlides = document.querySelectorAll('.portfolio-carousel-slide img');
 
-  portfolioCarouselSlides.forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImage.src = img.src;
-      lightboxImage.alt = img.alt;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  lightboxClose.addEventListener('click', () => {
+  const closeLightbox = () => {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+  };
+
+  portfolioTrack.addEventListener('click', (e) => {
+    const slide = e.target.closest('.portfolio-carousel-slide');
+    if (!slide) return;
+    const video = slide.querySelector('video');
+    if (!video) return;
+    lightboxVideo.src = video.src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    lightboxVideo.play();
   });
 
+  lightboxClose.addEventListener('click', closeLightbox);
+
   lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.querySelectorAll('.portfolio-carousel-slide video').forEach(v => {
+    v.play().catch(() => {});
   });
 
   // Close on Escape key

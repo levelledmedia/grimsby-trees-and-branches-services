@@ -1343,7 +1343,8 @@ body.tall-header .header__nav-bar {
   box-shadow: var(--sh-float);
 }
 
-.portfolio-carousel-slide img {
+.portfolio-carousel-slide img,
+.portfolio-carousel-slide video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1392,6 +1393,13 @@ body.tall-header .header__nav-bar {
 }
 
 .lightbox__image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-float);
+}
+
+.lightbox__video {
   max-width: 90%;
   max-height: 90%;
   border-radius: var(--r-xl);
