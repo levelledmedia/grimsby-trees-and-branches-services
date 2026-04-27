@@ -619,8 +619,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === lightbox) closeLightbox();
   });
 
-  document.querySelectorAll('.portfolio-carousel-slide video').forEach(v => {
-    v.play().catch(() => {});
+  document.querySelectorAll('#portfolioTrack video').forEach(v => {
+    const seek = () => { v.currentTime = Math.min(3, v.duration || 3); };
+    if (v.readyState >= 1) seek();
+    else v.addEventListener('loadedmetadata', seek, { once: true });
   });
 
   // Close on Escape key

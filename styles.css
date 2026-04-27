@@ -1331,6 +1331,27 @@ body.tall-header .header__nav-bar {
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
+  position: relative;
+}
+
+.portfolio-carousel-slide::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolygon points='7 4 20 12 7 20' fill='%23334155'/%3E%3C/svg%3E") center / 28px no-repeat;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  pointer-events: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.portfolio-carousel-slide:hover::after {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .portfolio-carousel-track .portfolio-carousel-slide[data-carousel-clone] {
